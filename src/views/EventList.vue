@@ -31,6 +31,7 @@ import EventService from '@/services/EventService.js'
 import { watchEffect } from '@vue/runtime-core'
 // import axios from 'axios'
 export default {
+  //eslint-disable-next-line no-unused-vars
   name: 'EventList',
   props: {
     page: {
@@ -68,14 +69,12 @@ export default {
         this.totalEvents = response.headers['x-total-count'] // <--- Store it
         next()
       })
-      .catch((error) => {
+      .catch(() => {
         next({ name: 'NetworkError ' })
-        console.log(error)
       })
   },
 
   created() {
-    //eslint-disable-next-line no-unused-vars
     watchEffect(() => {
       EventService.getEvents(2, this.page)
         .then((response) => {
