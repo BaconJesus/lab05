@@ -8,9 +8,9 @@ export default {
   props: ['event'],
   inject: ['GStore'],
   methods: {
-    editbut(){
+    editbut() {
       this.GStore.flashMessage =
-        'Your data for' + this.event.title +'has been updated'
+        'Your data for' + this.event.title + 'has been updated'
       setTimeout(() => {
         //After 3 seconds remove it
         this.GStore.flashMessage = ''

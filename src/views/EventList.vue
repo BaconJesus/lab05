@@ -48,32 +48,31 @@ export default {
     }
   },
 
-  beforeRouteEnter(routeTo, routeFrom, next){
-      EventService.getEvents(2, parseInt(routeTo.query.page) || 1)
-        .then((response) => {
-          next((comp) => {
+  beforeRouteEnter(routeTo, routeFrom, next) {
+    EventService.getEvents(2, parseInt(routeTo.query.page) || 1)
+      .then((response) => {
+        next((comp) => {
           comp.events = response.data
           comp.totalEvents = response.headers['x-total-count'] // <--- Store it
-          })
         })
-        .catch((error) => {
-          next({ name: 'NetworkError '})
-          console.log(error)
-    })
+      })
+      .catch((error) => {
+        next({ name: 'NetworkError ' })
+        console.log(error)
+      })
   },
-  beforeRouteUpdate(routeTo, routeFrom, next){
-      EventService.getEvents(2, parseInt(routeTo.query.page) || 1)
-        .then((response) => {
-          this.events = response.data
-          this.totalEvents = response.headers['x-total-count'] // <--- Store it
-          next()
-        })
-        .catch((error) => {
-          next({ name: 'NetworkError '})
-          console.log(error)
-    })
+  beforeRouteUpdate(routeTo, routeFrom, next) {
+    EventService.getEvents(2, parseInt(routeTo.query.page) || 1)
+      .then((response) => {
+        this.events = response.data
+        this.totalEvents = response.headers['x-total-count'] // <--- Store it
+        next()
+      })
+      .catch((error) => {
+        next({ name: 'NetworkError ' })
+        console.log(error)
+      })
   },
-
 
   created() {
     //eslint-disable-next-line no-unused-vars
