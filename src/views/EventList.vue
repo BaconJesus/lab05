@@ -50,7 +50,7 @@ export default {
   },
 
   beforeRouteEnter(routeTo, routeFrom, next) {
-    EventService.getEvents(2, parseInt(routeTo.query.page) || 1)
+    EventService.getEvents(3, parseInt(routeTo.query.page) || 1)
       .then((response) => {
         next((comp) => {
           comp.events = response.data
@@ -63,7 +63,7 @@ export default {
       })
   },
   beforeRouteUpdate(routeTo, routeFrom, next) {
-    EventService.getEvents(2, parseInt(routeTo.query.page) || 1)
+    EventService.getEvents(3, parseInt(routeTo.query.page) || 1)
       .then((response) => {
         this.events = response.data
         this.totalEvents = response.headers['x-total-count'] // <--- Store it
@@ -76,7 +76,7 @@ export default {
 
   created() {
     watchEffect(() => {
-      EventService.getEvents(2, this.page)
+      EventService.getEvents(3, this.page)
         .then((response) => {
           this.events = response.data
           this.totalEvents = response.headers['x-total-count'] // <--- Store it
@@ -90,7 +90,7 @@ export default {
   computed: {
     hasNextPage() {
       // First, calculate total pages
-      let totalPages = Math.ceil(this.totalEvents / 2) // 2 is events per page
+      let totalPages = Math.ceil(this.totalEvents / 3) // 3 is events per page
 
       // Then check to see if the current page is less than the total pages.
       return this.page < totalPages
